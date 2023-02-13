@@ -1,11 +1,14 @@
 {% extends 'blog/base.html' %}
-{% block content %}
+    {% block content %}
 
-{% for post in posts %}
-<article class="article">
-    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-    <h6>{{post.published_date}}</h6>
-    <p>{{ post.text|linebreaksbr }}</p>
-</article>
-{% endfor %}
-{% endblock %}
+        {% for post in posts %}
+            <br>
+            <article class="card bg-light justify-content-end">
+                <h1><a class="title" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <div class="likes"><i class="fa-regular fa-heart"></i>{{ post.likes }} - {{ post.published_date }}</div>
+                <p>{{ post.text|linebreaksbr }}</p>
+                <a class="comentarios" href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+            </article>
+        {% endfor %}
+
+    {% endblock %}

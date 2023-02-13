@@ -1,24 +1,24 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h2>Edit post</h2>
-    <div class="card text-white bg-success">
+    <h2>New post</h2>
+    <div class="card text-white bg-primary">
 
       <form method="POST" class="post-form">{% csrf_token %}
         
         <div class="mb-3">
           <label for="title" class="form-label">Title:</label>
           <input type="text"
-            class="form-control" name="title" id="id_title"aria-describedby="helpId" required placeholder="" value="{{ post.title }}">
+            class="form-control" name="title" id="id_title"aria-describedby="helpId" required placeholder="Write the title">
           <small id="helpId" class="form-text text-muted"></small>
         </div>
         
         <div class="mb-3">
             <label for="text" class="form-label">Content:</label>
-            <textarea class="form-control" name="text" id="id_text" required rows="3">{{ post.text }}</textarea>
+            <textarea class="form-control" name="text" id="id_text" required placeholder="Write the content" rows="3"></textarea>
           <small id="helpId" class="form-text text-muted"></small>
         </div>
-        <button type="submit" class="btn btn-info">Actualizar</button>
+        <button type="submit" class="btn btn-info">Guardar</button>
     </form>
     </div>
 {% endblock %}
