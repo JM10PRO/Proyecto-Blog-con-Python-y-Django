@@ -1,11 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+{%load static %}
+
 {% if user.is_authenticated %}
 <div class="actions">
-    <a class="btn btn-secondary edit" href="{% url 'post_edit' pk=post.pk %}">
-        Edit
-    </a>
+    <a class="btn btn-secondary edit" href="{% url 'post_edit' pk=post.pk %}"> <img src="{% static 'img/edit.svg' %}" class="icon"> Edit</a>
 </div>
 {% endif %}
 <article class="post card bg-info">
@@ -13,10 +13,14 @@
 
         <h2 class="titulo">{{ post.title }}</h2>
         <div>
-            <a href="{% url 'post_like' pk=post.pk %}"><i class="fa-regular fa-heart"></i></a> <a class="btn btn-secondary" href="{% url 'post_dislike' pk=post.pk %}">Dislike</a> {{ post.likes }}
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_like' pk=post.pk %}"><i class="fa-regular fa-heart like"></i></a> 
+            {{ post.likes }}
+            <a id="dislike" href="{% url 'post_dislike' pk=post.pk %}"><i class="fa-regular fa-thumbs-down dislike"></i></a> 
+            {% endif %}
             {% if post.published_date %}
             <time class="date">
-            - {{ post.published_date }}
+                <img src="{% static 'img/date.svg' %}" class="icon"> - {{ post.published_date }}
             </time>
             {% endif %}
         </div>
@@ -26,20 +30,21 @@
 </article>
 
 <div data-gb-custom-block data-tag="for">
-    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+    <p class="h3 mt-4 mb-3">Comments:</p>
+    <a class="btn btn-success" href="{% url 'add_comment_to_post' pk=post.pk %}"><img src="{% static 'img/plus.svg' %}" class="icon"> &nbsp; Add comment</a>
     {% for comment in post.comments.all %}
     {% if user.is_authenticated or comment.approved_comment %}
     <div class="card bg-light border border-2">
         <div class="date">
-            {{ comment.created_date }}
+            <img src="{% static 'img/date.svg' %}" class="icon"> {{ comment.created_date }}
             {% if not comment.approved_comment %}
             <div class="comment-actions">    
                 <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}"><i style="padding: 0px; margin: 0px;" class="fa-solid fa-trash"></i></a>
-                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span>Aprobar</a>
+                <a class="btn btn-warning" href="{% url 'comment_approve' pk=comment.pk %}"><img src="{% static 'img/check.svg' %}" class="icon"></a>
             </div>
             {% endif %}
         </div>
-        <strong>{{ comment.author }}</strong>
+        <strong><img src="{% static 'img/user.svg' %}" class="icon"> &nbsp; {{ comment.author }}</strong>
         <p>{{ comment.text|linebreaks }}</p>
     </div>
     {% endif %}

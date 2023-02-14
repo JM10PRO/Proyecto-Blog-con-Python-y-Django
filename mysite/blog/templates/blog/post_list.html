@@ -5,9 +5,9 @@
             <br>
             <article class="card bg-light justify-content-end">
                 <h1><a class="title" href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                <div class="likes"><i class="fa-regular fa-heart"></i>{{ post.likes }} - {{ post.published_date }}</div>
+                <div class="likes">{%load static %}<img src="{% static 'img/heart.svg' %}" class="icon"> {{ post.likes }} - {{ post.published_date }}</div>
                 <p>{{ post.text|linebreaksbr }}</p>
-                <a class="comentarios" href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+                <a class="comentarios" href="{% url 'post_detail' pk=post.pk %}"> {%load static %}<img src="{% static 'img/comment.svg' %}" class="icon"> Comments: {{ post.comments.count }}</a>
             </article>
         {% endfor %}
 

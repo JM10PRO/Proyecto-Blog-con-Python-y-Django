@@ -1,9 +1,16 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>New comment</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Send</button>
+    <h2>Write a new comment</h2>
+
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        
+        <input type="hidden" name="author" maxlength="200" required="" value="{{ user }}"  id="id_author">
+        
+        <textarea name="text" cols="30" rows="4" required="" id="id_text"></textarea>
+        <br>
+        <br>
+        <button type="submit" class="save btn btn-primary"> {%load static %} <img src="{% static 'img/send.svg' %}" class="icon"> &nbsp; Send</button>
     </form>
 {% endblock %}

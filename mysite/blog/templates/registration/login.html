@@ -1,0 +1,56 @@
+{% extends '../blog/base.html' %} 
+
+{% block content %}
+<div id="template-bg-1">
+    <div class="d-flex flex-column min-vh-100  justify-content-center align-items-center"
+        style="background-color: rgba(204, 204, 204, 0.35);">
+        <div class="card p-4 text-light bg-dark mb-5">
+            <div class="card-header">
+                <h3>Iniciar sesión </h3>
+            </div>
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+            {% endif %}
+            <div class="card-body w-100">
+                <div id="formulario">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                    <div class="input-group form-group mt-3">
+                        <div class="bg-secondary rounded-start m-0">
+                            <span class="m-3"><i class="fas fa-user mt-2"></i></span>
+                        </div>
+                         {{ form.username }}
+                    </div>
+                    <div class="input-group form-group mt-3">
+                        <div class="bg-secondary rounded-start m-0">
+                            <span class="m-3"><i class="fas fa-key mt-2"></i></span>
+                        </div>
+                        {{ form.password }}
+                    </div>
+                    <div class="input-group form-group mt-3" style="display: none;" id="repitePass">
+                        <div class="bg-secondary rounded-start">
+                            <span class="m-3"><i class="fas fa-key mt-2"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Repite la contraseña" name="repeatpassword"
+                            id="repeatpassword">
+                    </div>
+                    <div class="form-group mt-3" id="acceder">
+                        <input id="enviar" type="submit" value="Acceder"
+                            class="btn bg-secondary float-end text-white w-100" name="login-btn">
+                    </div>
+                    <div class="form-group mt-3" id="bt-registrarUsuario" style="display: none;">
+                        <input id="registrarme" type="submit" value="Registrarme"
+                            class="btn bg-secondary float-end text-white w-100" name="login-btn">
+                    </div>
+                    <br><br>
+                    <div class="form-group mt-3" id="msg-registro" style="margin: 0 auto;">¿Aún no tienes cuenta? <span style="color: #0077ff;" class="btn" id="registrarse">Registrarse</span></div>
+                    <div class="form-group mt-3" id="msg-iniciarsesion" style="margin: 0 auto; display: none;">¿Ya tienes cuenta? <span style="color: #0077ff;" class="btn" id="iniciarsesion">Iniciar sesión</span></div>
+                    <div class="form-group mt-3" id="error-login" style="display: none; margin: 0 auto; color: #f00;">Usuario o contraseña incorrecto</div>
+                    <div class="form-group mt-3" id="error-registro" style="display: none; margin: 0 auto; color: #f00;">Error</div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

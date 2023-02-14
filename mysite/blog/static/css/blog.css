@@ -22,7 +22,7 @@ body {
 }
 
 .menu {
-    background: #3062a4a6;
+    background: #1b5db3c7;
     background-repeat: no-repeat;
     display: flex;
     flex-flow: row nowrap;
@@ -53,40 +53,41 @@ i {
 }
 
 a:link {
-    color: #3062a4 !important;
+    color: #c7882a !important;
 }
 
 a:visited {
-    color: #3062a4 !important;
+    color: #c7882a !important;
 }
 
 a:hover {
-    color: #58cbaf !important;
+    color: #baab28 !important;
 }
 
 a:active {
-    color: #0994df !important;
+    color: #19a3ed !important;
 }
 
-.nav a {
+.nav a.nav-enlace {
     text-decoration: none;
     color: #fff !important;
     font-size: 1vw;
     text-transform: uppercase;
 }
 
-.nav a:hover {
-    color:#58cbaf !important;
+.nav a.nav-enlace:hover {
+    color: #58cbaf !important;
 }
 
 img#fondo-blog {
-    width: 150px !important; 
+    width: 150px !important;
     height: 300px !important;
     border-radius: 20px !important;
 }
 
-h1 a, h6 a {
-    color: #C25100;
+h1 a,
+h6 a {
+    color: #b85e1e;
     font-family: 'Lobster';
 }
 
@@ -132,7 +133,7 @@ footer {
     margin: 0px 10px;
 }
 
-div.likes > i {
+div.likes>i {
     padding-right: 0;
 }
 
@@ -147,7 +148,6 @@ article p {
 }
 
 div i.fa-regular.fa-heart {
-    filter: hue-rotate(115deg);
     padding: 0px;
 }
 
@@ -163,4 +163,60 @@ div.comment-actions i.fa-solid.fa-trash {
     padding: 0px;
     margin: 0px;
 
+}
+
+div.cuenta a{
+    color:#000 !important;
+}
+
+div.cuenta a:hover {
+    color:#000 !important;
+}
+
+input#id_username, input#id_password {
+    padding: 0 !important;
+    width: 70% !important;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+div.cuenta a.usuario_conectado{
+    color:#fff !important;
+}
+
+div.cuenta a.cuenta_login, div.cuenta a.cuenta_logout{
+    color:#000 !important;
+    margin: 0;
+    background-color: #e1e1e1;
+    border-radius: 15px;
+}
+
+div.cuenta a.cuenta_login:hover, div.cuenta a.cuenta_logout:hover{
+    background-color: #bbb;
+}
+
+img.icon {
+    width: 30px;
+    margin: 0;
+}
+
+
+i.like {
+    color: #e70000e0 !important;
+}
+
+i.like:hover {
+    color: #9c0e0e !important;
+}
+
+i.dislike {
+    color: #233ec8 !important;
+}
+
+i.dislike:hover {
+    color: #082678 !important;
+}
+
+i.fa-trash {
+    color: #ffffff;
 }
