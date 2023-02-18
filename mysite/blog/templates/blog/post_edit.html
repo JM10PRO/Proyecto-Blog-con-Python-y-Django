@@ -1,24 +1,59 @@
 {% extends 'blog/base.html' %}
-
+{% load static %}
 {% block content %}
-    <h2>Edit post</h2>
-    <div class="card text-white bg-success">
+<div class="row justify-content-center g-2">
+  <div class="col">
+    <h2 class="mt-4">Edit post</h2>
+      <div class="card text-white bg-success">
 
-      <form method="POST" class="post-form">{% csrf_token %}
-        
-        <div class="mb-3">
-          <label for="title" class="form-label">Title:</label>
-          <input type="text"
-            class="form-control" name="title" id="id_title"aria-describedby="helpId" required placeholder="" value="{{ post.title }}">
-          <small id="helpId" class="form-text text-muted"></small>
-        </div>
-        
-        <div class="mb-3">
-            <label for="text" class="form-label">Content:</label>
-            <textarea class="form-control" name="text" id="id_text" required rows="3">{{ post.text }}</textarea>
-          <small id="helpId" class="form-text text-muted"></small>
-        </div>
-        <button type="submit" class="btn btn-info">Actualizar</button>
-    </form>
+        <form method="POST" class="post-form">{% csrf_token %}
+          
+          <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text"
+              class="form-control" name="title" id="id_title"aria-describedby="helpId" required placeholder="" value="{{ post.title }}">
+            <small id="helpId" class="form-text text-muted"></small>
+          </div>
+          
+          <div class="mb-3">
+              <label for="text" class="form-label">Content:</label>
+              <textarea class="form-control" name="text" id="id_text" required rows="3">{{ post.text }}</textarea>
+            <small id="helpId" class="form-text text-muted"></small>
+          </div>
+          <button type="submit" class="btn btn-info">Actualizar</button>
+        </form>
+      </div>
+  </div>
+  <div class="col">
+      <div data-gb-custom-block data-tag="for">
+        <p class="h3 mt-4 mb-3">Comments:</p>
+        <a class="btn btn-success" href="{% url 'add_comment_to_post' pk=post.pk %}"><img src="{% static 'img/plus.svg' %}" class="icon"> &nbsp; Add comment</a>
+        {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approved_comment %}
+            <div class="card bg-light border border-2">
+              <div class="row justify-content-evenly align-items-center pt-4">
+                <div class="col col-2">
+                  <div class="comment-actions">    
+                    <a class="btn btn-danger m-0 p-3" href="{% url 'comment_remove' pk=comment.pk %}"><i style="padding: 0px; margin: 0px;" class="fa-solid fa-trash"></i></a>
+                    {% if not comment.approved_comment %}
+                      <a class="btn btn-warning m-0 mt-2" href="{% url 'comment_approve' pk=comment.pk %}"><img src="{% static 'img/check.svg' %}" class="icon"></a>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="col col-9 p-0">
+                  <div class="card-body m-0 pt-2 pb-0 g-2">
+                    <img src="{% static 'img/date.svg' %}" class="icon"> {{ comment.created_date }}
+                    <p><strong><img src="{% static 'img/user.svg' %}" class="icon"> &nbsp; {{ comment.author }}</strong></p>
+                    <p>{{ comment.text }}</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+            {% endif %}
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
     </div>
+  </div>
+</div>
 {% endblock %}

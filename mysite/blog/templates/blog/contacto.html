@@ -1,17 +1,85 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <div>Contacto</div>
-    <div class="card text-start">
-    {%load static %}
-      <img class="card-img-top" src="{% static 'img/fondo-blog.jpg' %}" alt="Fondo formulario" style="
-      background-position: center;
-      background-size: cover;
-      width: 500px;
-      height: 500px;
-      ">
-      <div class="card-body">
-        <h4 class="card-title">Title</h4>
-        <p class="card-text">Body</p>
+    <div class="h3">Formulario de contacto</div>
+    <div class="card text-start bg-body-secondary pt-3">
+      <div class="row justify-content-between p-0">
+        <div class="col col-5 m-0 p-0">
+          {%load static %}
+          <img class="card-img-top m-0" src="{% static 'img/fondo-blog.jpg' %}" alt="Fondo formulario" style="
+          background-position: center;
+          background-size: cover;
+          width: 400px;
+          height: 400px;
+          ">
+        </div>
+        <div class="col col-7 m-0 p-0">
+          <form method="POST" class="post-form m-0">{% csrf_token %}
+          
+            <div class="mb-3 text-start">
+              <label for="nombre" class="form-label m-0">Nombre:</label>
+              <input type="text"
+                class="form-control-sm" name="nombre" id="id_nombre"aria-describedby="helpId" required placeholder="" value="">
+              <label for="apellidos" class="form-label me-0">Apellidos:</label>
+              <input type="text"
+                class="form-control-sm" name="apellidos" id="id_apellidos"aria-describedby="helpId" required placeholder="" value="">
+            </div>
+            
+            <div class="mb-3 text-start">
+              <label for="correo" class="form-label m-0 me-2">Correo:</label>
+              <input type="text"
+                class="form-control-sm text-start" name="correo" id="id_correo"aria-describedby="helpId" required placeholder="@" value="">
+              <label for="telefono" class="form-label me-0">Teléfono:</label>
+              <input type="text"
+                class="form-control-sm text-start" name="telefono" id="id_telefono"aria-describedby="helpId" required placeholder="959123456" value="">
+            </div>
+            
+            <div class="mx-3 mb-3 text-start">
+                <label for="text" class="form-label ms-0">Sugerencias para el blog:</label>
+                <textarea class="form-control text-start" name="text" id="id_text" required rows="3" placeholder="Escribe algún tema para debatir en el blog"></textarea>
+                
+                <label for="text" class="form-label text-start mt-3 mb-0 ms-0">¿Te interesa conocer más sobre algún tema de actualidad?</label>
+                
+                <div class="row">
+                  
+                  <div class="col">
+                    <div class="form-check text-start mt-0">
+                      <input class="form-check-input" type="radio" name="deporte" id="deporte">
+                      <label class="form-check-label text-start fw-normal m-0" for="deporte">
+                        Deporte
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-check text-start mt-0">
+                      <input class="form-check-input" type="radio" name="moda" id="moda">
+                      <label class="form-check-label text-start fw-normal m-0" for="moda">
+                        Moda
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <div class="col">
+                    <div class="form-check text-start mt-0">
+                      <input class="form-check-input" type="radio" name="cultura" id="cultura">
+                      <label class="form-check-label text-start fw-normal m-0" for="cultura">
+                        Cultura
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" checked value="suscribirme" id="noticias_checkbox">
+                  <label class="form-check-label text-start h6 m-0" for="noticias_checkbox">
+                    Suscribirme al blog para recibir correos sobre noticias semanales.
+                  </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info mt-4"><img src="{% static 'img/send.svg' %}" class="icon"> &nbsp;Enviar</button>
+          </form>
+        </div>
       </div>
     </div>
 {% endblock %}
