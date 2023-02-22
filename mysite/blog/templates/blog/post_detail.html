@@ -37,11 +37,13 @@
     <div class="card bg-light border border-2">
         <div class="date">
             <img src="{% static 'img/date.svg' %}" class="icon"> {{ comment.created_date }}
+            {% if perms.blog.delete_post %}
             {% if not comment.approved_comment %}
             <div class="comment-actions">    
                 <a class="btn btn-danger" href="{% url 'comment_remove' pk=comment.pk %}"><i style="padding: 0px; margin: 0px;" class="fa-solid fa-trash"></i></a>
                 <a class="btn btn-warning" href="{% url 'comment_approve' pk=comment.pk %}"><img src="{% static 'img/check.svg' %}" class="icon"></a>
             </div>
+            {% endif %}
             {% endif %}
         </div>
         <strong><img src="{% static 'img/user.svg' %}" class="icon"> &nbsp; {{ comment.author }}</strong>

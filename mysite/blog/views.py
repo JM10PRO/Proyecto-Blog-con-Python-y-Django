@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 def profile(request):
     return redirect('post_list')
 
-@login_required
+
 def post_list(request):
     posts = Post.objects.all().order_by('-published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
